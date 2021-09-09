@@ -14,7 +14,6 @@
   load "/glade/u/home/lmuntje/analysis/CISM/map_greenland.ncl"
   load "/gpfs/u/home/lmuntje/analysis/CISM/resources.ncl"
 
-
 ;************************************************
 ; get env variables
 ;************************************************
@@ -50,8 +49,7 @@ begin
 ;  file1 = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63.cism.h.0031-01-01-00000.nc"
 ;  file2 = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.test.4.noTinit_63/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.test.4.noTinit_63.cism.h.0031-01-01-00000.nc"
 ;  restfile = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63/rest/0031-01-01-00000/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63.cism.r.0031-01-01-00000.nc"
-
-;  file1		="/glade/scratch/sbradley/archive/alphagr4_T1850G/glc/hist/alphagr4_T1850G.cism.h.9901-01-01-00000.nc"
+;
 ;  file2		="/glade/scratch/lmuntje/archive/tg.e20.T1850G.f09_g17.testing.012/glc/hist/tg.e20.T1850G.f09_g17.testing.012.cism.h.9901-01-01-00000.nc"
 ;  restfile	="/glade/scratch/lmuntje/archive/b.e20.BHIST.f09_g17.testing.003/rest/1964-01-03-00000/b.e20.BHIST.f09_g17.testing.001e.cism.r.1964-01-03-00000.nc"
 
