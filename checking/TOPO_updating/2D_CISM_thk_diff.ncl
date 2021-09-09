@@ -1,37 +1,22 @@
 ;*************************************************
-; gland_1.ncl
 ;
-; Concepts illustrated:
-;   - Plotting Greenland merged data
-;   - Using projection data on the file 
-;   - Use side-by-side paneling to examine the mapping difference
-;   - draw via panels
-;*****************************************************
-; 
-; NCL's mapping software operates in spherical space, but WGS84 
-; and systems like it describe an ellipsoid not a sphere. 
-; As a result, there are some slight differences from the
-; native projection (left) and the map using lat2d/lon2d.
+; Plot 2 panels Greenland topography
+; and 1 panel difference between them
+;
 ;*****************************************************
 ;
 ; These files are loaded by default in NCL V6.2.0 and newer
-; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"  
-; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"    
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+; load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 
   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
   load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
-
-  load "/glade/u/home/lvank/analysis/libncl/monthly_to_season.ncl"
-  load "/glade/u/home/lvank/analysis/libncl/get_racmo_data.ncl"
-  ;load "/glade/u/home/lvank/analysis/libncl/map_greenland.ncl"
- 
   load "/glade/u/home/lmuntje/analysis/CISM/map_greenland.ncl"
- 
   load "/gpfs/u/home/lmuntje/analysis/CISM/resources.ncl"
- 
+
 
 ;************************************************
-; get env variables 
+; get env variables
 ;************************************************
 
 
@@ -39,39 +24,36 @@
   case1=case1
   period1=period1
 
-  
+
   cism2=cism2
   case2=case2
   period2=period2
 
 
 
-begin 
+begin
 
 ;************************************************
 ; read in netCDF file
 ;************************************************
 
-  ;scratch="/glade/scratch/cmip6/"
-  scratch="/glade/scratch/katec/"
+
 
   file1		=scratch+"archive/"+cism1+"/glc/hist/"+cism1+".cism.h."+period1+"-01-01-00000.nc"
   file2		=scratch+"archive/"+cism2+"/glc/hist/"+cism2+".cism.h."+period2+"-01-01-00000.nc"
-  
-  
-  
+  restfile="/glade/p/cesm/liwg/JG_BG_setup_and_initial_conditions/archivebkup_Dec2018/BG_iteration_1/rest/0002-01-01-00000/BG_iteration_1.cism.r.0002-01-01-00000.nc"
+
 ;  file1		="/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit.cism.h.0050-01-01-00000.nc"
-;  file2		="/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_cism60/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_cism60.cism.h.0050-01-01-00000.nc" 
+;  file2		="/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_cism60/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_cism60.cism.h.0050-01-01-00000.nc"
 ;  restfile	="/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit/rest/0051-01-01-00000/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit.cism.r.0051-01-01-00000.nc"
 
 ;  file1 = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63.cism.h.0031-01-01-00000.nc"
 ;  file2 = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.test.4.noTinit_63/glc/hist/ig.e20.IHISTCLM50BGCG.f09_g17.test.4.noTinit_63.cism.h.0031-01-01-00000.nc"
-; restfile = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63/rest/0031-01-01-00000/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63.cism.r.0031-01-01-00000.nc"
+;  restfile = "/glade/scratch/lmuntje/archive/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63/rest/0031-01-01-00000/ig.e20.IHISTCLM50BGCG.f09_g17.B003forcing_eigencalv_PDinit_Tinit_63.cism.r.0031-01-01-00000.nc"
 
 ;  file1		="/glade/scratch/sbradley/archive/alphagr4_T1850G/glc/hist/alphagr4_T1850G.cism.h.9901-01-01-00000.nc"
 ;  file2		="/glade/scratch/lmuntje/archive/tg.e20.T1850G.f09_g17.testing.012/glc/hist/tg.e20.T1850G.f09_g17.testing.012.cism.h.9901-01-01-00000.nc"
 ;  restfile	="/glade/scratch/lmuntje/archive/b.e20.BHIST.f09_g17.testing.003/rest/1964-01-03-00000/b.e20.BHIST.f09_g17.testing.001e.cism.r.1964-01-03-00000.nc"
-  restfile="/glade/p/cesm/liwg/JG_BG_setup_and_initial_conditions/archivebkup_Dec2018/BG_iteration_1/rest/0002-01-01-00000/BG_iteration_1.cism.r.0002-01-01-00000.nc"
 
   fili1 = addfile(file1,"r")
   fili2 = addfile(file2,"r")
@@ -122,14 +104,14 @@ begin
 
   topo1@lat2d = lat
   topo1@lon2d = lon
-  
+
   topo2@lat2d = lat
   topo2@lon2d = lon
 
 
 
 ;************************************************
-; read variables; plot 
+; read variables; plot
 ;************************************************
 
   map_area="greenland"
@@ -137,7 +119,7 @@ begin
   wks = gsn_open_wks("png",outname)
 
 
-   ; panel plotting 
+   ; panel plotting
    resat1 = True
    resat2 = True
    resat3 = True
@@ -154,17 +136,17 @@ begin
    pres@gsnPanelMainString = "Thickness"
 
 
-   label1 = case1 
-   label2 = case2 
+   label1 = case1
+   label2 = case2
    label_diff = "difference [b - a]"
 
    res@gsnCenterString            = label1
    res2@gsnCenterString           = label2
    res4@gsnCenterString           = label_diff
 
-   my_levels            	   := (/ 1, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000 /)  ;19 colors
-   res@cnFillPalette		   = "rh_19lev"
-   res2@cnFillPalette		   = "rh_19lev"
+   my_levels            	         := (/ 1, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000 /)  ;19 colors
+   res@cnFillPalette		           = "rh_19lev"
+   res2@cnFillPalette		           = "rh_19lev"
    res@lbTitleString   	           = "thickness [m]"
    res4@lbTitleString              = "diff thickness [m]"
 
@@ -182,29 +164,20 @@ begin
    overlayLeftLabelbar(wks, pplot(0), thk1, res)
    overlayNoLabelbar(wks, pplot(1), thk2, res2)
 
-   ;my_diff_levels                       := (/ -1500, -1000, -800, -600, -400, -200, -100, -50, -25, 0, 25, 50, 100, 200, 400, 600, 800, 1000, 1500 /)
+   ;my_diff_levels      := (/ -1500, -1000, -800, -600, -400, -200, -100, -50, -25, 0, 25, 50, 100, 200, 400, 600, 800, 1000, 1500 /)
    ;my_diff_levels			:= (/ -750, -500, -375, -250, -175, -100, -50, -25, -10, 0, 10, 25, 50, 100, 175, 250, 375, 500, 750 /)    		; 19 colors
    ;my_diff_levels 			:=(/-400,-200,-100,-50,-35, -20,-10,-5,-1,0,1,5,10, 20, 35, 50, 100,200, 400/)
-   my_diff_levels                 =(/ -64., -32., -16., -8., -4., -2., -1., -0.5, -0.25, -0.1, 0., 0.1, 0.25, 0.5, 1., 2., 4., 8., 16., 32., 64./)
+   my_diff_levels       :=(/ -64., -32., -16., -8., -4., -2., -1., -0.5, -0.25, -0.1, 0., 0.1, 0.25, 0.5, 1., 2., 4., 8., 16., 32., 64./)
 
    setLevels(my_diff_levels)
    res4@cnFillPalette       = "cmocean_balance"
    overlayLeftLabelbar(wks, pplot(2), diff, res4)
-   
-;   overlayHeight(wks, pplot(0), topo1)
-;   overlayHeight(wks, pplot(1), topo2)
+
+
    overlayCoast(wks, pplot(0))
    overlayCoast(wks,pplot(1))
    overlayCoast(wks,pplot(2))
-   
+
    gsn_panel(wks, (/pplot(0),pplot(1),pplot(2)/), (/1,3/),pres)
 
 end
-
-
-
-
-
-
-
-

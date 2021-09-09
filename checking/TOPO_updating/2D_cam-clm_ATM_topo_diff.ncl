@@ -15,17 +15,17 @@ begin
 ;===============
 ; Details about run
 
-;= status of the simulation, and the years requested. I.e. are they in archive of in the run directory. 
+;= status of the simulation, and the years requested. I.e. are they in archive of in the run directory.
 ; options: "archive", "running"
  status = status
- 
+
 ;= experiment simulation details   # CAM restart file
  run    = run1
  shortn = short1
  period = period1
 
 
-;= control simulation detail       # CLM hist. file
+;= control simulation details       # CLM hist. file
  run_ctrl       = run2
  shortn_ctrl    = short2
  period_ctrl	= period2
@@ -36,8 +36,6 @@ begin
 
 
  varlist = (/"ATM_TOPO"/)
- ;scratch="/glade/scratch/cmip6/"
- scratch="/glade/scratch/katec/"
  CONST_G       = 9.80616   ; ../cime/src/share/util/shr_const_mod.F90:   real(R8),parameter :: SHR_CONST_G       = 9.80616_R8      ! acceleration of gravity ~ m/s^2
 
  if ( status .eq. "archive" ) then
@@ -138,7 +136,7 @@ begin
    res@tmYLLabelsOn            = False
    res@tmYRLabelsOn            = False
 
-   res@tiYAxisString           = shortn 
+   res@tiYAxisString           = shortn
    plot_data = gsn_csm_contour_map(wks,data,res)
 
    res@tiYAxisString           = shortn_ctrl
@@ -165,5 +163,3 @@ begin
 
 
 end
-
-
