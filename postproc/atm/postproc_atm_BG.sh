@@ -42,7 +42,7 @@ fi
 for casename in ${casenames[@]}; do
   echo $casename
   # make folder to put the finished product in 
-  opruimdir="$oprdir"/"$casename"/atm/rproc/timeseries/
+  opruimdir="$oprdir"/"$casename"/atm/postproc/timeseries/
   mkdir -p $opruimdir
   olddir=$opruimdir/old
   mkdir -p $olddir

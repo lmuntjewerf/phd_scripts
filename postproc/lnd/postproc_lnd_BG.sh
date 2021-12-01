@@ -9,7 +9,7 @@ user=lmuntje
 indir=/glade/scratch/lmuntje/CESM21_ctrl_landdata
 
 # make opruimdir
-opruimdir=/glade/work/$user/CESM2.1/ISMIP6/b.e21.B1850G.f09_g17_gl4.CMIP6-piControl-withism.001/lnd/
+opruimdir=/glade/work/$user/CESM2.1/ISMIP6/b.e21.B1850G.f09_g17_gl4.CMIP6-piControl-withism.001/lnd/postproc/timeseries/
 # make opruimdir if not already exists
 if [ -d "$opruimdir" ]; then
     echo "$opruimdir exists."
