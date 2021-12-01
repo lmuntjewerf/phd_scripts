@@ -81,6 +81,6 @@ for casename in ${casenames[@]} ; do
   cdo runmean,$nts $opruimdir/"$casename".cism.h.timeseries.total_smb_flux_tavg.nc $opruimdir/"$nts"yr-runmean_"$casename".cism.h.timeseries.total_smb_flux_tavg.nc
 
 
-  # empty tempdir
+  # empty the tempdir
   rm "$tempdir"/*.nc
 done
